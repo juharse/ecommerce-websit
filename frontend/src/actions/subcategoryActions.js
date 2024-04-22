@@ -47,7 +47,7 @@ export const addSubcategory = (name, category) => async (dispatch) => {
 export const deleteSubcategory = (subcategoryId) => async (dispatch) => {
     try {
         dispatch({ type: SUBCATEGORY_DELETE_REQUEST });
-        await axios.delete(`/api/subcategories/${subcategoryId}`);
+        await axios.delete(`https://ecommerce-websit-3.onrender.com/api/subcategories/${subcategoryId}`);
         dispatch({ type: SUBCATEGORY_DELETE_SUCCESS });
     } catch (error) {
         dispatch({
