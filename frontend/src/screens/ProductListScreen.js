@@ -11,6 +11,7 @@ import {
   PRODUCT_CREATE_RESET,
   PRODUCT_DELETE_RESET,
 } from '../constants/productConstants';
+//import '../components/product-list-screen.css'; 
 
 export default function ProductListScreen(props) {
   const productList = useSelector((state) => state.productList);
@@ -53,7 +54,7 @@ export default function ProductListScreen(props) {
   };
   return (
     <div>
-      <div className="row">
+      <div className="row" >
         <h1>Products</h1>
         <button type="button" className="primary" onClick={createHandler}>
           Create Product
@@ -77,7 +78,10 @@ export default function ProductListScreen(props) {
               <th>NAME</th>
               <th>PRICE</th>
               <th>CATEGORY</th>
-              <th>BRAND</th>
+              <th>subCATEGORY</th>
+
+
+              <th>B+RAND</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -88,6 +92,7 @@ export default function ProductListScreen(props) {
                 <td>{product.name}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
+                <td>{product.subcategory}</td>
                 <td>{product.brand}</td>
                 <td>
                   <button

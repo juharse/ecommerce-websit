@@ -7,24 +7,29 @@ import userRouter from './routers/userRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
 
+import categoryRouter from './routers/categoryRoutes.js';
+import subcategoryRouter from './routers/subcategoryRoutes.js';
+
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/imizallahamazon', {
+mongoose.connect(process.env.REACT_APP_API_DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 })
-  .then(res => console.log("Sunday Ishaya Database up and running::::: "))
+  .then(res => console.log(" Database up and running::::: "))
   .catch(err => console.log("Sunday Ishaya Database error:: ", err))
 
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/categories', categoryRouter);
+app.use('/api/subcategories', subcategoryRouter);
 app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });

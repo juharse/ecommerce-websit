@@ -3,6 +3,8 @@ import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../models/productModel.js';
 import { isAdmin, isAuth } from '../utils.js';
+import mongoose from 'mongoose';
+
 
 const productRouter = express.Router();
 
@@ -26,7 +28,7 @@ productRouter.get(
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate('category').populate('subcategory');
     if (product) {
       res.send(product);
     } else {
@@ -44,7 +46,8 @@ productRouter.post(
       name: 'sample name ' + Date.now(),
       image: '/images/p1.jpg',
       price: 0,
-      category: 'sample category',
+      category: '66153f6d2c90754f486511bc',
+      subcategory: '66153f6d2c90754f486511bc',
       brand: 'sample brand',
       countInStock: 0,
       rating: 0,
@@ -67,6 +70,7 @@ productRouter.put(
       product.price = req.body.price;
       product.image = req.body.image;
       product.category = req.body.category;
+      product.subcategory=req.body.subCategory;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
@@ -92,5 +96,22 @@ productRouter.delete(
     }
   })
 );
+/*productRouter.get(
+  '/category/:category',
+  expressAsyncHandler(async (req, res) => {
+    const category = req.params.category;
+    const products = await Product.find({ category });
+    res.send(products);
+  })
+);*/
+productRouter.get('/subcategory/:subcategoryId', expressAsyncHandler(async (req, res) => {
+  const subcategoryId = req.params.subcategoryId;
+  const products = await Product.find({ subcategory: subcategoryId }).populate('category').populate('subcategory');
+  if (products.length > 0) {
+    res.send(products);
+  } else {
+    res.status(404).send({ message: 'No products found under this subcategory' });
+  }
+}));
 
 export default productRouter;

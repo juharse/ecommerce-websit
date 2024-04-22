@@ -1,0 +1,80 @@
+/* product-screen.css */
+
+.product-screen-container {
+  margin: 20px auto; /* Center the container horizontally */
+  margin-top: 50px;
+  max-width: 1200px; /* Set maximum width for the container */
+  display: flex; /* Use flexbox layout for the container */
+}
+
+.product-screen-container .back-to-result {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.product-screen-container .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute items evenly along the row */
+}
+
+.product-screen-container .col-2 {
+  flex: 0 0 250px; /* Set a fixed width of 250px for the sidebar */
+}
+
+.product-screen-container .col-1 {
+  flex: 1; /* Allow the description column to grow */
+  padding-left: 20px;
+}
+
+.product-screen-container .large {
+  width: 100%;
+  height: 300px; /* Set a fixed height for the images */
+  object-fit: cover; /* Ensure the image covers the entire container */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.product-screen-container .price {
+  font-weight: bold;
+}
+
+.product-screen-container .success {
+  color: green;
+}
+
+.product-screen-container .danger {
+  color: red;
+}
+
+.product-screen-container select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+}
+
+.product-screen-container button.primary {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.product-screen-container button.primary:hover {
+  background-color: #0056b3;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}

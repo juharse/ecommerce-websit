@@ -1,0 +1,13 @@
+.stylish-dropdown .dropdown-menu {
+    padding: 0.5rem 0;
+    min-width: 300px;  
+}
+
+.stylish-dropdown .dropdown-header {
+    padding-left: 20px;
+    color: #007bff;  
+}
+
+.stylish-dropdown .dropdown-item {
+    padding: 0.25rem 20px;  
+}

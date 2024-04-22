@@ -2,7 +2,7 @@
   "name": "amazona",
   "type": "module",
   "version": "1.0.0",
-  "description": "Ecommerce website like amazon",
+  "description": "website",
   "main": "index.js",
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
@@ -10,17 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/basir/amazona.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/basir/amazona/issues"
   },
-  "homepage": "https://github.com/basir/amazona#readme",
+  "homepage": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
+    "envdot": "^0.0.3",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",

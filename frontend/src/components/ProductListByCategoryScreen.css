@@ -1,0 +1,38 @@
+/* ProductListByCategoryScreen.css */
+.product-list-container {
+  max-width:100%;
+  margin: 0 auto;
+  /*padding: 20px;
+  padding-top: 0px;*/
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0px;
+}
+
+.product-list .pagination {
+  margin-top: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.product-list .pagination button {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-list .pagination button.active {
+  background-color: #0056b3;
+}
+
+.product-list .pagination button:hover {
+  background-color: #0056b3;
+}

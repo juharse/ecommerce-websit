@@ -32,108 +32,93 @@ export default function PlaceOrderScreen(props) {
     }
   }, [dispatch, order, props.history, success]);
   return (
-    <div>
-      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
-      <div className="row top">
-        <div className="col-2">
-          <ul>
-            <li>
-              <div className="card card-body">
-                <h2>Shipping</h2>
-                <p>
-                  <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {cart.shippingAddress.address},
-                  {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-                  ,{cart.shippingAddress.country}
-                </p>
-              </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Payment</h2>
-                <p>
-                  <strong>Method:</strong> {cart.paymentMethod}
-                </p>
-              </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Order Items</h2>
-                <ul>
-                  {cart.cartItems.map((item) => (
-                    <li key={item.product}>
-                      <div className="row">
-                        <div>
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="small"
-                          ></img>
-                        </div>
-                        <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>
-                        </div>
-
-                        <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
-                        </div>
+    <div className="container">
+      <CheckoutSteps step1 step2 step3 step4 />
+      <div className="row">
+        <div className="col-lg-8">
+          <div className="card mb-3">
+            <div className="card-body">
+              <h2 className="card-title">Shipping</h2>
+              <p className="card-text">
+                <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
+                <strong>Address: </strong> {cart.shippingAddress.address},
+                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
+                ,{cart.shippingAddress.country}
+              </p>
+            </div>
+          </div>
+          <div className="card mb-3">
+            <div className="card-body">
+              <h2 className="card-title">Payment</h2>
+              <p className="card-text">
+                <strong>Method:</strong> {cart.paymentMethod}
+              </p>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-body">
+              <h2 className="card-title">Order Items</h2>
+              <ul className="list-group list-group-flush">
+                {cart.cartItems.map((item) => (
+                  <li key={item.product} className="list-group-item">
+                    <div className="row align-items-center">
+                      <div className="col-3">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="img-fluid"
+                        />
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          </ul>
+                      <div className="col">
+                        <Link to={`/product/${item.product}`}>
+                          {item.name}
+                        </Link>
+                      </div>
+                      <div className="col">
+                        {item.qty} x ${item.price} = ${item.qty * item.price}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        <div className="col-1">
-          <div className="card card-body">
-            <ul>
-              <li>
-                <h2>Order Summary</h2>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Items</div>
-                  <div>${cart.itemsPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Shipping</div>
-                  <div>${cart.shippingPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Tax</div>
-                  <div>${cart.taxPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>
-                    <strong> Order Total</strong>
-                  </div>
-                  <div>
-                    <strong>${cart.totalPrice.toFixed(2)}</strong>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={placeOrderHandler}
-                  className="primary block"
-                  disabled={cart.cartItems.length === 0}
-                >
-                  Place Order
-                </button>
-              </li>
-              {loading && <LoadingBox></LoadingBox>}
+        <div className="col-lg-4">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="card-title">Order Summary</h2>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                  Items
+                  <span>${cart.itemsPrice.toFixed(2)}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                  Shipping
+                  <span>${cart.shippingPrice.toFixed(2)}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                  Tax
+                  <span>${cart.taxPrice.toFixed(2)}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                  <strong>Total</strong>
+                  <strong>${cart.totalPrice.toFixed(2)}</strong>
+                </li>
+                <li className="list-group-item">
+                  <button
+                    type="button"
+                    onClick={placeOrderHandler}
+                    className="btn btn-primary btn-lg btn-block"
+                    disabled={cart.cartItems.length === 0}
+                  >
+                    Place Order
+                  </button>
+                </li>
+              </ul>
+              {loading && <LoadingBox />}
               {error && <MessageBox variant="danger">{error}</MessageBox>}
-            </ul>
+            </div>
           </div>
         </div>
       </div>

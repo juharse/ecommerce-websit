@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
+import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import CartScreen from './screens/CartScreen';
@@ -18,6 +21,17 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import CategoryScreen from './screens/CategoryScreen';
+import SearchResultsPage from './screens/SearchResultsPage';
+import AboutUs from './components/AboutUs';
+import ContactUs from './components/ContactUs';
+import CategoriesScreen from './screens/CategoriesScreen';
+import SubcategoriesScreen from './screens/SubcategoriesScreen';
+//import './components/app.css'
+//const categories = ['all','electronics', 'clothing', 'books','Shirts',];
+
+
+//const categories = ['all', 'electronics', 'clothing', 'books', 'Shirts'];
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -25,73 +39,69 @@ function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
+  const [subcategories, setsubcategories] = useState([]);
+
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('/api/categories'); // Fetch products from your API
+        setProducts(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    const fetchSubcategories= async () => {
+      try {
+        const response = await axios.get('/api/subcategories'); // Fetch products from your API
+        setsubcategories(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchSubcategories();
+  }, []);
+
+  //const [selectedCategory, setSelectedCategory] = useState('all');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const signoutHandler = () => {
     dispatch(signout());
   };
+
   return (
     <BrowserRouter>
-      <div className="grid-container">
-        <header className="row">
-          <div>
-            <Link className="brand" to="/">
-              amazona
-            </Link>
-          </div>
-          <div>
-            <Link to="/cart">
-              Cart
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
-              )}
-            </Link>
-            {userInfo ? (
-              <div className="dropdown">
-                <Link to="#">
-                  {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">User Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderhistory">Order History</Link>
-                  </li>
-                  <li>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <Link to="/signin">Sign In</Link>
-            )}
-            {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
-                <Link to="#admin">
-                  Admin <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li>
-                    <Link to="/productlist">Products</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist">Orders</Link>
-                  </li>
-                  <li>
-                    <Link to="/userlist">Users</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-        </header>
-        <main>
+      <div className="app">
+        <Navbar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          signoutHandler={signoutHandler}
+          userInfo={userInfo}
+          cartItems={cartItems}
+          products={products} 
+          subcategories={subcategories}
+        />
+      
+          <main>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
+          <Route path="/search" component={SearchResultsPage} />
+          <Route path="/AboutUs" component={AboutUs } />
+          <Route path="/ContactUs" component={ContactUs} />
+          
+          
+          
+          {/* Define route for displaying products by category */}
+          {/* Use CategoryScreen component */}
           <Route
             path="/product/:id/edit"
             component={ProductEditScreen}
@@ -111,11 +121,18 @@ function App() {
           <AdminRoute
             path="/productlist"
             component={ProductListScreen}
+
           ></AdminRoute>
+         <AdminRoute path="/categories" component={CategoriesScreen}></AdminRoute>
+         <AdminRoute path="/subcategories" component={SubcategoriesScreen}></AdminRoute>
+
+
           <AdminRoute
             path="/orderlist"
             component={OrderListScreen}
           ></AdminRoute>
+          
+          <Route path="/subcategory/:subcategoryId" component={CategoryScreen} exact></Route> 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">All right reserved</footer>
@@ -123,5 +140,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

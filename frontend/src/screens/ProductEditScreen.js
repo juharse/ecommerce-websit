@@ -12,21 +12,57 @@ export default function ProductEditScreen(props) {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
+  const [subCategory, setSubCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
   const productUpdate = useSelector((state) => state.productUpdate);
-  const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate,
-  } = productUpdate;
+  const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate;
 
   const dispatch = useDispatch();
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  // Fetch categories
+  const fetchCategories = async () => {
+    try {
+      const { data } = await Axios.get('/api/categories', {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      setCategories(data);
+    } catch (error) {
+      console.error('Error fetching categories', error);
+    }
+  };
+
+  // Fetch subcategories when category changes
+  useEffect(() => {
+    const fetchSubCategories = async () => {
+      try {
+        const { data } = await Axios.get(`/api/subcategories?category=${category}`, {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        });
+        setSubCategories(data);
+      } catch (error) {
+        console.error('Error fetching subcategories', error);
+      }
+    };
+    if (category) {
+      fetchSubCategories();
+    }
+  }, [category, userInfo.token]);
+
   useEffect(() => {
     if (successUpdate) {
       props.history.push('/productlist');
@@ -39,32 +75,33 @@ export default function ProductEditScreen(props) {
       setPrice(product.price);
       setImage(product.image);
       setCategory(product.category);
+      setSubCategory(product.subcategory);
       setCountInStock(product.countInStock);
       setBrand(product.brand);
       setDescription(product.description);
     }
+    fetchCategories();
+  
   }, [product, dispatch, productId, successUpdate, props.history]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    // TODO: dispatch update product
-    dispatch(
-      updateProduct({
-        _id: productId,
-        name,
-        price,
-        image,
-        category,
-        brand,
-        countInStock,
-        description,
-      })
-    );
+    dispatch(updateProduct({
+      _id: productId,
+      name,
+      price,
+      image,
+      category,
+      subCategory,
+      brand,
+      countInStock,
+      description,
+    }));
   };
+
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -91,10 +128,10 @@ export default function ProductEditScreen(props) {
         <div>
           <h1>Edit Product {productId}</h1>
         </div>
-        {loadingUpdate && <LoadingBox></LoadingBox>}
+        {loadingUpdate && <LoadingBox />}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <LoadingBox />
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
@@ -128,28 +165,47 @@ export default function ProductEditScreen(props) {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
-            </div>
-            <div>
-              <label htmlFor="imageFile">Image File</label>
-              <input
-                type="file"
-                id="imageFile"
-                label="Choose Image"
-                onChange={uploadFileHandler}
-              ></input>
-              {loadingUpload && <LoadingBox></LoadingBox>}
-              {errorUpload && (
-                <MessageBox variant="danger">{errorUpload}</MessageBox>
-              )}
+              <input type="file" id="imageFile" label="Choose Image" onChange={uploadFileHandler}></input>
+              {loadingUpload && <LoadingBox />}
+              {errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox>}
             </div>
             <div>
               <label htmlFor="category">Category</label>
-              <input
+              <select
                 id="category"
-                type="text"
-                placeholder="Enter category"
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  //setSubCategory(''); // Reset subcategory when category changes
+                }}
+              >
+                <option value="">Select a Category</option>
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>{cat.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="subcategory">Subcategory</label>
+              <select
+                id="subcategory"
+                value={subCategory}
+                onChange={(e) => setSubCategory(e.target.value)}
+              >
+                <option value="">Select a Subcategory</option>
+                {subCategories.map((sub) => (
+                  <option key={sub._id} value={sub._id}>{sub.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="countInStock">Count in Stock</label>
+              <input
+                id="countInStock"
+                type="text"
+                placeholder="Enter stock count"
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
               ></input>
             </div>
             <div>
@@ -160,16 +216,6 @@ export default function ProductEditScreen(props) {
                 placeholder="Enter brand"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="countInStock">Count In Stock</label>
-              <input
-                id="countInStock"
-                type="text"
-                placeholder="Enter countInStock"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
               ></input>
             </div>
             <div>
@@ -184,10 +230,7 @@ export default function ProductEditScreen(props) {
               ></textarea>
             </div>
             <div>
-              <label></label>
-              <button className="primary" type="submit">
-                Update
-              </button>
+              <button type="submit" className="primary">Update</button>
             </div>
           </>
         )}

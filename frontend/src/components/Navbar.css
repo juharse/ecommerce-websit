@@ -1,0 +1,149 @@
+/* Navbar.css */
+
+/* Navbar container */
+.navbar {
+  background-color:orange;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+/* Navbar container with flex display */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo link */
+.logo {
+  font-size: 20px;
+  color:red;
+  text-decoration: none;
+}
+
+/* Toggle button */
+.menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Navbar links */
+.navbar-links {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Navbar menu */
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Navbar menu item */
+.nav-item {
+  margin-right: 20px;
+}
+
+/* Navbar menu link */
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Show dropdown content when hover */
+.dropdown-content.show {
+  display: block;
+}
+
+/* Dropdown items */
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Dropdown items on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Search input */
+.navbar-search input[type="text"] {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* Search button */
+.search-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+/* Cart icon */
+.fa-shopping-cart {
+  margin-right: 5px;
+}
+
+/* Badge for cart items */
+.badge {
+  background-color: #007bff;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown menu items */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:white;
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Show dropdown content */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.nav-dropdown .dropdown-menu {
+  width: 100%; /* Ensure the dropdown menu uses the full width */
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.nav-dropdown .col {
+  padding-right: 5px;
+  padding-left: 5px;
+}

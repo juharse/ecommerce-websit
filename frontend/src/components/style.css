@@ -1,0 +1,52 @@
+/* Ensure dropdown menu takes full width and is positioned correctly */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Adjust if necessary based on your navbar height */
+    left: 0;
+    z-index: 1000;
+    width: 100%; /* Full width dropdown */
+    min-width: 160px; /* Minimum width */
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+
+/* Ensure that links in the dropdown are styled appropriately */
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+/* Hover and focus states for links */
+.dropdown-menu a:hover, .dropdown-menu a:focus {
+    background-color: #f5f5f5;
+    color: #262626;
+}
+
+/* Responsive behavior for smaller screens */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static; /* Allows the dropdown to take full width of the screen */
+        width: 100%;
+    }
+}
+.dropdown-menu.multi-column {
+    width: 400px;
+}
+ 
+.dropdown-menu.multi-column .dropdown-menu {
+    display: block !important;
+    position: static !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}

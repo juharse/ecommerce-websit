@@ -1,0 +1,49 @@
+.category-dropdowns .dropdown-menu {
+    min-width: 300px; /* Adjust based on content size */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category-dropdowns .dropdown-menu .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-dropdowns .dropdown-item {
+    white-space: normal; /* Ensures text doesn't overflow */
+    padding: 8px 10px;
+}
+
+.category-dropdowns .dropdown-toggle {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+}
+.category-dropdown .dropdown-menu {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.category-dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+}
+
+.dropdown-container {
+    display: inline-block; /* Adjust as necessary */
+}
+
+.category-dropdown .dropdown-menu {
+    display: block; /* Ensures that the dropdown can show when active */
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%; /* Ensures that dropdown items take full width of their column */
+    clear: both;
+    white-space: nowrap;
+    margin-top: 40px;
+}
+
+/*.dropdown-menu {
+    padding: 10px;
+}*/
+

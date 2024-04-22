@@ -15,6 +15,9 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_SUCCESS,
+  PRODUCT_LIST_BY_CATEGORY_REQUEST,
+  PRODUCT_LIST_BY_CATEGORY_SUCCESS,
+  PRODUCT_LIST_BY_CATEGORY_FAIL,
 } from '../constants/productConstants';
 
 export const listProducts = () => async (dispatch) => {
@@ -103,5 +106,20 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
     dispatch({ type: PRODUCT_DELETE_FAIL, payload: message });
+  }
+};
+export const listProductsByCategory = (subcategoryId) => async (dispatch) => {
+  dispatch({ type: PRODUCT_LIST_BY_CATEGORY_REQUEST });
+  try {
+    const { data } = await Axios.get(`/api/products/subcategory/${subcategoryId}`);
+    dispatch({ type: PRODUCT_LIST_BY_CATEGORY_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_BY_CATEGORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
 };

@@ -1,0 +1,36 @@
+/* HomeScreen.css */
+
+/* Sidebar styles */
+.sidebar {
+  background-color: #f8f9fa; /* Set sidebar background color */
+  padding: 20px; /* Add padding to the sidebar */
+}
+
+/* Sidebar label styles */
+.form-label {
+  font-size: 16px; /* Set font size for labels */
+  font-weight: bold; /* Make labels bold */
+  color: #000; /* Set text color for labels */
+}
+
+/* Sidebar select styles */
+.form-select {
+  font-size: 14px; /* Set font size for select input */
+  color: #000; /* Set text color for select input */
+  background-color: #fff; /* Set background color for select input */
+  border: 1px solid #ced4da; /* Add border to select input */
+  border-radius: 5px; /* Add border radius to select input */
+  padding: 8px 12px; /* Add padding to select input */
+  width: 100%; /* Set width to 100% */
+}
+
+/* Main content styles */
+.col-md-10 {
+  padding: 20px; /* Add padding to main content */
+}
+.products-per-page-dropdown {
+  position: fixed;
+  top: 100px;
+  right: 50px;
+  z-index: 100;
+}

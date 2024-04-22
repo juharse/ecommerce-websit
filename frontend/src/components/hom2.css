@@ -1,0 +1,9 @@
+.product-grid .col {
+    margin-bottom: 20px; /* Adjust the margin between rows */
+  }
+  
+  .product-grid {
+    margin-left: -10px; /* Adjust the left margin of the product grid */
+    margin-right: -10px; /* Adjust the right margin of the product grid */
+  }
+  

@@ -1,0 +1,120 @@
+/* General styling for the navbar */
+.navbar {
+  background-color:blue;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 20px; /* This padding ensures that the navbar content is not touching the edges */
+  display: flex;
+  justify-content: space-between; /* This helps position items on either end of the navbar */
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 100px;
+  margin-top: 0;
+}
+
+/* Styling for navigation links */
+.nav-link {
+  color:red;
+  font-size: 16px; /* Increased font size for better readability */
+  transition: color 0.3s ease;
+  padding: 15px 10px; /* Increased padding to accommodate larger font size */
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+/* Dropdown button to match nav-link styles */
+.dropdown-toggle {
+  margin-top: 5px;
+  background: none;
+  color:black;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; /* Ensure dropdown toggles have the same font size as nav links */
+  padding: 15px 10px; /* Matching padding to ensure uniform height and appearance */
+}
+
+/* Dropdown menu styling to ensure consistency */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  left: 0;
+  border: none;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 15px; /* Adjusted padding to ensure items are easy to click and look aligned */
+  color: #333;
+  font-size: 12px; /* Slightly smaller font size than the main nav links for distinction */
+  text-decoration: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+@media (max-width: 992px) {
+  .navbar-toggle {
+      margin-right: 15px; /* Ensure toggle is not flush against edge in mobile view */
+  }
+
+  .navbar-collapse {
+      background-color: #ff8c00; /* Mobile menu background */
+      padding: 10px;
+  }
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 250px;
+  left: 0;
+  right: 0;
+  border: 1px solid #ddd;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu-content {
+  max-height: 200px; /* Adjust the maximum height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.dropdown-column {
+  padding: 10px;
+  border-right: 1px solid #ddd;
+  min-width: 160px;
+}
+
+.dropdown-column:last-child {
+  border-right: none;
+}
+
+.dropdown-item {
+  padding: 5px 10px;
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
