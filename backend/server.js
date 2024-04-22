@@ -9,14 +9,13 @@ import uploadRouter from './routers/uploadRouter.js';
 
 import categoryRouter from './routers/categoryRoutes.js';
 import subcategoryRouter from './routers/subcategoryRoutes.js';
-import cors from 'cors';
+//import cors from 'cors';
 
 dotenv.config();
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+//app.use(cors());
 
 mongoose.connect(process.env.REACT_APP_API_DATABASE, {
   useNewUrlParser: true,
