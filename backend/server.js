@@ -1,5 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+
 import dotenv from 'dotenv';
 import path from 'path';
 import productRouter from './routers/productRouter.js';
@@ -10,12 +12,12 @@ import uploadRouter from './routers/uploadRouter.js';
 import categoryRouter from './routers/categoryRoutes.js';
 import subcategoryRouter from './routers/subcategoryRoutes.js';
 //import cors from 'cors';
-
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(cors());
+
 
 mongoose.connect(process.env.REACT_APP_API_DATABASE, {
   useNewUrlParser: true,
@@ -24,7 +26,14 @@ mongoose.connect(process.env.REACT_APP_API_DATABASE, {
 })
   .then(res => console.log(" Database up and running::::: "))
   .catch(err => console.log("Sunday Ishaya Database error:: ", err))
-
+  const apiProxy = createProxyMiddleware({
+    target: 'https://ecommerce-websit-3.onrender.com',
+    changeOrigin: true,
+  });
+  
+  // Proxy requests to the API server
+  app.use('/api', apiProxy);
+ 
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
