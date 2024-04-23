@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { createProxyMiddleware } from 'http-proxy-middleware';
+//import { createProxyMiddleware } from 'http-proxy-middleware';
 
 import dotenv from 'dotenv';
 import path from 'path';
@@ -26,13 +26,13 @@ mongoose.connect(process.env.REACT_APP_API_DATABASE, {
 })
   .then(res => console.log(" Database up and running::::: "))
   .catch(err => console.log("Sunday Ishaya Database error:: ", err))
-  const apiProxy = createProxyMiddleware({
+  /*const apiProxy = createProxyMiddleware({
     target: 'https://ecommerce-websit-3.onrender.com',
     changeOrigin: true,
   });
   
   // Proxy requests to the API server
-  app.use('/api', apiProxy);
+  app.use('/api', apiProxy);*/
  
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
