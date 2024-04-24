@@ -15,7 +15,7 @@ export const SUBCATEGORY_DELETE_FAIL = 'SUBCATEGORY_DELETE_FAIL';
 export const listSubcategories = () => async (dispatch) => {
     try {
         dispatch({ type: SUBCATEGORY_LIST_REQUEST });
-        const { data } = await axios.get('/api/subcategories');
+        const { data } = await axios.get('https://ecommerce-websit-3.onrender.com/api/subcategories');
         dispatch({ type: SUBCATEGORY_LIST_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
@@ -31,7 +31,7 @@ export const listSubcategories = () => async (dispatch) => {
 export const addSubcategory = (name, category) => async (dispatch) => {
     try {
         dispatch({ type: SUBCATEGORY_ADD_REQUEST });
-        const { data } = await axios.post('/api/subcategories', { name, category });
+        const { data } = await axios.post('https://ecommerce-websit-3.onrender.com/api/subcategories', { name, category });
         dispatch({ type: SUBCATEGORY_ADD_SUCCESS, payload: data });
     } catch (error) {
         dispatch({

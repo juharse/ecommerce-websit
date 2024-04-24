@@ -36,7 +36,7 @@ export default function ProductScreen(props) {
             <div className="col-lg-6">
               <img
                 className="img-fluid rounded mb-3"
-                src={product.image}
+                src={ `https://ecommerce-websit-3.onrender.com${product.image}`}
                 alt={product.name}
               />
             </div>

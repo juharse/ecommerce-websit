@@ -46,7 +46,7 @@ function App() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('/api/categories'); // Fetch products from your API
+        const response = await axios.get('https://ecommerce-websit-3.onrender.com/api/categories'); // Fetch products from your API
         setProducts(response.data);
         console.log(response.data)
       } catch (error) {
@@ -60,7 +60,7 @@ function App() {
   useEffect(() => {
     const fetchSubcategories= async () => {
       try {
-        const response = await axios.get('/api/subcategories'); // Fetch products from your API
+        const response = await axios.get('https://ecommerce-websit-3.onrender.com/api/subcategories'); // Fetch products from your API
         setsubcategories(response.data);
         console.log(response.data)
       } catch (error) {

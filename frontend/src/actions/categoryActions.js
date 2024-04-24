@@ -5,7 +5,7 @@ export const listCategories = () => async (dispatch) => {
   try {
     dispatch({ type: 'CATEGORY_LIST_REQUEST' });
 
-    const { data } = await axios.get('/api/categories');
+    const { data } = await axios.get('https://ecommerce-websit-3.onrender.com/api/categories');
 
     dispatch({
       type: 'CATEGORY_LIST_SUCCESS',
@@ -23,7 +23,7 @@ export const addCategory = (name) => async (dispatch) => {
   try {
     dispatch({ type: 'CATEGORY_ADD_REQUEST' });
 
-    const { data } = await axios.post('/api/categories', { name });
+    const { data } = await axios.post('https://ecommerce-websit-3.onrender.com/api/categories', { name });
 
     dispatch({
       type: 'CATEGORY_ADD_SUCCESS',
@@ -41,7 +41,7 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
   try {
     dispatch({ type: 'CATEGORY_DELETE_REQUEST' });
 
-    await axios.delete(`/api/categories/${categoryId}`);
+    await axios.delete(`https://ecommerce-websit-3.onrender.com/api/categories/${categoryId}`);
 
     dispatch({
       type: 'CATEGORY_DELETE_SUCCESS',

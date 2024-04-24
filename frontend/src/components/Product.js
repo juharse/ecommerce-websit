@@ -14,7 +14,7 @@ const Product = ({ product }) => {
   return (
     <div key={product._id} className="product">
       <Link to={`/product/${product._id}`}>
-        <img className="product-image" src={product.image} alt={product.name} />
+        <img className="product-image" src={ `https://ecommerce-websit-3.onrender.com${product.image}`} alt={product.name} />
       </Link>
       <div className="product-details">
         <Link to={`/product/${product._id}`} className="product-name">

@@ -33,7 +33,7 @@ export default function ProductEditScreen(props) {
   // Fetch categories
   const fetchCategories = async () => {
     try {
-      const { data } = await Axios.get('/api/categories', {
+      const { data } = await Axios.get('https://ecommerce-websit-3.onrender.com/api/categories', {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
         },
@@ -48,7 +48,7 @@ export default function ProductEditScreen(props) {
   useEffect(() => {
     const fetchSubCategories = async () => {
       try {
-        const { data } = await Axios.get(`/api/subcategories?category=${category}`, {
+        const { data } = await Axios.get(`https://ecommerce-websit-3.onrender.com/api/subcategories?category=${category}`, {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
           },
@@ -108,12 +108,14 @@ export default function ProductEditScreen(props) {
     bodyFormData.append('image', file);
     setLoadingUpload(true);
     try {
-      const { data } = await Axios.post('/api/uploads', bodyFormData, {
+      const { data } = await Axios.post('https://ecommerce-websit-3.onrender.com/api/uploads', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${userInfo.token}`,
         },
       });
+      console.log(data)
+
       setImage(data);
       setLoadingUpload(false);
     } catch (error) {
