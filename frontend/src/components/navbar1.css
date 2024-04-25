@@ -15,7 +15,7 @@
 
 /* Styling for navigation links */
 .nav-link {
-  color:red;
+  color:white;
   font-size: 16px; /* Increased font size for better readability */
   transition: color 0.3s ease;
   padding: 15px 10px; /* Increased padding to accommodate larger font size */
@@ -30,7 +30,7 @@
 .dropdown-toggle {
   margin-top: 5px;
   background: none;
-  color:black;
+  color:white;
   border: none;
   cursor: pointer;
   font-size: 14px; /* Ensure dropdown toggles have the same font size as nav links */

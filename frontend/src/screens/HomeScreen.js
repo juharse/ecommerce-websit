@@ -44,7 +44,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <div className="container-fluid" style={{marginTop:20,marginLeft:200}}>
+    <div className="container-fluid" style={{marginTop:20,display:'flex',alignItems:'center'}}>
       <div className="row">
         <div className="col-md-10 main-content">
           <div className="row row-cols-1 row-cols-md-4 g-4"style={{border:'none',gap:0}}>
