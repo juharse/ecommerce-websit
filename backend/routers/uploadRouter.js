@@ -18,5 +18,10 @@ const upload = multer({ storage });
 uploadRouter.post('/', isAuth, upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
+uploadRouter.get('/:imageName', (req, res) => {
+  const { imageName } = req.params;
+  const imageUrl = `${req.protocol}://${req.get('host')}/images/${imageName}`;
+  res.json({ imageUrl });
+});
 
 export default uploadRouter;
