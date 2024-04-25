@@ -20,7 +20,8 @@ uploadRouter.post('/', isAuth, upload.single('image'), (req, res) => {
 });
 uploadRouter.get('/:imageName', (req, res) => {
   const { imageName } = req.params;
-  const imageUrl = `${req.protocol}://${req.get('host')}/images/${imageName}`;
+  const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${imageName}`;
+  console.log(imageUrl)
   res.json({ imageUrl });
 });
 
