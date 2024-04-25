@@ -16,7 +16,23 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
 
+async function fetchImage(imageName) {
+  try {
+    // Assuming images are stored in the 'images' directory
+    const imagePath = path.join(__dirname, 'images', imageName);
+
+    // Read the image file
+    const imageData = await fs.readFile(imagePath);
+
+    return { success: true, data: imageData };
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    return { success: false, error: 'Image not found' };
+  }
+}
 uploadRouter.post('/', isAuth, upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
@@ -29,21 +45,21 @@ uploadRouter.get('/:imageName', async (req, res) => {
   const { imageName } = req.params;
 
   try {
-    // Assuming images are stored in the 'images' directory
-    const imagePath = path.join(__dirname, './uploads', imageName);
-
-    // Read the image file
-    const imageData = await fs.readFile(imagePath);
-
-    // Set the content type header
-    res.setHeader('Content-Type', 'image/jpg'); // Adjust the content type based on your image format
-
-    // Send the image data as the response
-    res.send(imageData);
+    const result = await fetchImage(imageName);
+    if (result.success) {
+      // Set the appropriate content type header
+      res.setHeader('Content-Type', 'image/jpg'); // Adjust the content type based on your image format
+      // Send the image data as the response
+      res.send(result.data);
+    } else {
+      // If fetching the image failed, return an error response
+      res.status(404).json({ error: result.error });
+    }
   } catch (error) {
     console.error('Error fetching image:', error);
-    res.status(404).json({ error: 'Image not found' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 export default uploadRouter;
