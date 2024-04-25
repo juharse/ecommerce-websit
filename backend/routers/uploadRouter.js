@@ -30,13 +30,13 @@ uploadRouter.get('/:imageName', async (req, res) => {
 
   try {
     // Assuming images are stored in the 'images' directory
-    const imagePath = path.join(__dirname, 'uploads', imageName);
+    const imagePath = path.join(__dirname, './uploads', imageName);
 
     // Read the image file
     const imageData = await fs.readFile(imagePath);
 
     // Set the content type header
-    res.setHeader('Content-Type', 'image/jpeg'); // Adjust the content type based on your image format
+    res.setHeader('Content-Type', 'image/jpg'); // Adjust the content type based on your image format
 
     // Send the image data as the response
     res.send(imageData);
