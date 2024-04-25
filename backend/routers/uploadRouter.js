@@ -23,6 +23,7 @@ async function fetchImage(imageName) {
   try {
     // Assuming images are stored in the 'images' directory
     const imagePath = path.join(__dirname, 'uploads', imageName);
+    console.log(imagePath)
 
     // Read the image file
     const imageData = await fs.readFile(imagePath);
