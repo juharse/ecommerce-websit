@@ -24,10 +24,12 @@ async function fetchImage(imageName) {
   try {
     // Get the directory name of the current module
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
-    
+    console.log('__dirname:', __dirname); // Log __dirname to verify the current directory
+
     // Assuming the 'uploads' folder is within the 'backend' directory
-    const imagePath = path.join(__dirname, '..', 'uploads', imageName);
-    
+    const imagePath = path.join(__dirname, '..', '/uploads', imageName);
+    console.log('imagePath:', imagePath); // Log imagePath to verify the constructed path
+
     // Read the image file
     const imageData = await fs.readFile(imagePath);
 
