@@ -42,12 +42,12 @@ async function fetchImage(imageName) {
 uploadRouter.post('/', isAuth, upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
-/*uploadRouter.get('/:imageName', (req, res) => {
+uploadRouter.get('/:imageName', (req, res) => {
   const { imageName } = req.params;
   const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${imageName}`;
   res.json({ imageUrl });
-});*/
-uploadRouter.get('/:imageName', async (req, res) => {
+});
+/*uploadRouter.get('/:imageName', async (req, res) => {
   const { imageName } = req.params;
 
   try {
@@ -65,7 +65,7 @@ uploadRouter.get('/:imageName', async (req, res) => {
     console.error('Error fetching image:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
-});
+});*/
 
 
 export default uploadRouter;
