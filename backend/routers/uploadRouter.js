@@ -17,14 +17,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 const __filename = new URL(import.meta.url).pathname;
+console.log(__filename)
 const __dirname = path.dirname(__filename);
 
 async function fetchImage(imageName) {
   try {
-    // Assuming images are stored in the 'images' directory
-    const imagePath = path.join(__dirname, 'uploads', imageName);
-    console.log(imagePath)
-
+    // Get the directory name of the current module
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+    
+    // Assuming the 'uploads' folder is within the 'backend' directory
+    const imagePath = path.join(__dirname, '..', 'uploads', imageName);
+    
     // Read the image file
     const imageData = await fs.readFile(imagePath);
 
